@@ -1,0 +1,116 @@
+{% extends "layouts/base-fullscreen.html" %}
+{% load static %}
+{% block title %}Vista Categoria{% endblock %}
+{% block stylesheets %}{% endblock stylesheets %}     
+{% block content %}
+{% include 'includes/navigation-transparent.html' %}
+ 
+          <header class="bg-gradient-dark">
+            <div class="page-header min-vh-50" style="background-image: url('{{ ASSETS_ROOT }}/img/bg10.jpg');">
+            </div>
+          </header>
+                  <!---------- END Features w/ pattern background & stats & rocket -------- -->
+                  <div class="container grid text-center espacio-container">
+                    <div class="row align-items-start">
+                      <div class="col-lg-7">
+                        <div class="container special-img borde position-relative overflow-hidden ">
+                          <img class=" " src="../media/{{verTipospq.imagen}}" style="width:50%" alt="Escenario">
+                        </div>
+                      </div>
+                  
+                      <div class="col-lg-5">
+                       
+                        <hr>
+                        
+                        <div class="col">
+                          TIPO
+                          <h4> {{verTipospq.nombre}}</h4>
+                        </div>
+                        <hr>
+                  
+                        <hr>
+                        <div class="col">
+                          DESCRIPCION
+                          <h4 align="center"> {{verTipospq.descripcion}} </h4>
+                        </div>
+                        <hr>
+                  
+                        <hr>
+                        <div class="col">
+                          RESTRICIONES
+                          <h4>{{verTipospq.restriciones}}</h4>
+                        </div>
+                        <hr>
+                      </div>
+                    </div>
+
+                    <hr>
+        
+                    <div class="row align-items-start">
+                      <div class="col">
+                        <h3>FORMULARIO PQRS </h3>
+                        <form action="/registroListas/{{verTipospq.id}}" method="post" class="row g-3">{% csrf_token %}
+                          <div class="col-md-12">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="correo" id="correo" placeholder="email@example.com">
+                          </div>
+                          <div class="col-6">
+                            <label for="inputNombre" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="">
+                          </div>
+                          <div class="col-6">
+                            <label for="inputApellido" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" name="apellido" id="apellido" placeholder="">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="">Ci/Ruc</label>
+                            <input type="text" name="ci" id="ci"class="form-control"   maxlength="10" minlength="10"  required> 
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="">Telefono</label>
+                            <input type="text" name="telefono" id="telefono" class="form-control" pattern="^[0-9999999999]+" maxlength="10" minlength="10" required>
+                          </div>
+                  
+                          {% comment %} Fecha a Reservar {% endcomment %}
+                          <div class="col-md-4">
+                            <label for="inputFecha" class="form-label">Fecha de compra</label>
+                            <input type="date" class="form-control" name="fecha_lista" id="fecha_lista">
+                          </div>
+                  
+                          {% comment %} Hora Inicio {% endcomment %}
+                          <div class="col-md-4">
+                            <label for="inputHorainicio" class="form-label">Presentaciones</label>
+                            <select class="form-control" id="Presentaciones" name="Presentaciones">
+                              {% for op in horarioI %}
+                                  <option value="{{ op.0 }}">{{ op.1 }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                  
+  
+                          <div class="col-md-4">
+                            <label for="inputHorafin" class="form-label">Productos</label>
+                            <select class="form-control" id="Productos" name="Productos">
+                              {% for op in horarioF %}
+                                <option value="{{ op.0 }}">{{ op.1 }}</option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                  
+                          <div class="col-md-4"></div>
+                  
+                          {% comment %} Total a pagar {% endcomment %}
+                          <div class="col-md-4">
+                            <label for="inputHorafin" class="form-label">Cantidad</label>
+                            <input type="text" name="cantidad" id="cantidad" class="form-control" pattern="^[0-9999999999]+" maxlength="10" minlength="1" required>
+                          </div>
+                  
+                          <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+  {% endblock %}          
+
